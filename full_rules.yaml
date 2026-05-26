@@ -1,0 +1,644 @@
+# MediaTidy 综合规则文件
+# 来源: shenxianmq/GroupRe.txt + shutu777/custom_words.txt + custom_rendering_words.txt + custom_group.txt
+# 更新时间: 2026-03-03
+
+# ==================== 正则替换 (mr) ====================
+mr:
+  # --- 容易误识别的年份标题 TMDB绑定 ---
+  - pattern: "^1923"
+    bind: { tmdb: 157744, media: tv }
+  - pattern: "^1883"
+    bind: { tmdb: 118357, media: tv }
+  - pattern: "^1942"
+    bind: { tmdb: 130063, media: tv }
+  - pattern: "^1992.*?2015"
+    bind: { tmdb: 62459, media: tv }
+  - pattern: "^2012\\."
+    replace: "二零一二."
+  - pattern: "^1917\\."
+    replace: "一九一七."
+  - pattern: "^2046\\."
+    bind: { tmdb: 844, media: movie }
+  # 喀什恋歌  
+  - pattern: Bloom Life
+    bind: { tmdb: 289708, media: tv }
+
+  # --- 数字开头容易混淆的标题 ---
+  - pattern: "^12\\.Monkeys"
+    replace: "十二猴子."
+  - pattern: "11\\.Rebels"
+    bind: { tmdb: 1310682, media: movie }
+  - pattern: "119\\.Emergency\\.Call\\."
+    replace: "119紧急呼叫."
+  - pattern: "101\\.Marriages"
+    replace: "101次抢婚"
+
+  # --- 特殊标题 TMDB绑定 ---
+  - pattern: "Madame\\.Web"
+    bind: { tmdb: 634492, media: movie }
+  - pattern: "F1：狂飙飞车"
+    bind: { tmdb: 911430, media: movie }
+  - pattern: "Move to Heaven：我是遗物整理师"
+    bind: { tmdb: 96571, media: tv }
+  - pattern: "ONE：高中英雄们"
+    bind: { tmdb: 233219, media: tv }
+  - pattern: "Perfect World"
+    bind: { tmdb: 124003, media: tv }
+  - pattern: "成何体统 \\(2024\\)"
+    bind: { tmdb: 256783, media: tv }
+  - pattern: "成何体统 \\(2026\\)"
+    bind: { tmdb: 280632, media: tv }
+  - pattern: "Mother.*2009"
+    bind: { tmdb: 30018, media: movie }
+  - pattern: "Resurrection.*2025"
+    bind: { tmdb: 878608, media: movie }
+  - pattern: "超时空要塞\\sFrontier"
+    bind: { tmdb: 5857, media: tv }
+  - pattern: "正义使者\\s*-\\s*我的英雄学院之非法英雄"
+    bind: { tmdb: 280110, media: tv }
+
+  # --- 少女与战车 最终章系列 ---
+  - pattern: "少女与战车 最终章 ～第1话～"
+    bind: { tmdb: 474659, media: movie }
+  - pattern: "少女与战车 最终章 ～第2话～"
+    bind: { tmdb: 496891, media: movie }
+  - pattern: "少女与战车 最终章 ～第3话～"
+    bind: { tmdb: 746880, media: movie }
+  - pattern: "少女与战车 最终章 ～第4话～"
+    bind: { tmdb: 1051192, media: movie }
+
+  # --- 教父系列 ---
+  - pattern: "教父\\.1\\."
+    bind: { tmdb: 238, media: movie }
+  - pattern: "The\\.Godfather\\.Part\\.I(?=[\\W_]|$)"
+    bind: { tmdb: 242, media: movie }
+  - pattern: "The\\.Godfather\\.Part\\.1"
+    bind: { tmdb: 242, media: movie }
+  - pattern: "教父\\.2\\."
+    bind: { tmdb: 240, media: movie }
+  - pattern: "The\\.Godfather\\.Part\\.II"
+    bind: { tmdb: 240, media: movie }
+  - pattern: "The\\.Godfather\\.Part\\.2"
+    bind: { tmdb: 240, media: movie }
+  - pattern: "教父\\.3\\."
+    bind: { tmdb: 242, media: movie }
+  - pattern: "The\\.Godfather\\.Part\\.III"
+    bind: { tmdb: 242, media: movie }
+  - pattern: "The\\.Godfather\\.Part\\.3"
+    bind: { tmdb: 242, media: movie }
+
+  # --- 哈利波特系列 ---
+  - pattern: "Harry\\.Potter\\.I(?=[\\W_]|$)"
+    bind: { tmdb: 671, media: movie }
+  - pattern: "哈利波特1"
+    bind: { tmdb: 671, media: movie }
+  - pattern: "Harry\\.Potter\\.II"
+    bind: { tmdb: 672, media: movie }
+  - pattern: "哈利波特2"
+    bind: { tmdb: 672, media: movie }
+  - pattern: "Harry\\.Potter\\.III"
+    bind: { tmdb: 673, media: movie }
+  - pattern: "哈利波特3"
+    bind: { tmdb: 673, media: movie }
+  - pattern: "Harry\\.Potter\\.IV"
+    bind: { tmdb: 674, media: movie }
+  - pattern: "哈利波特4"
+    bind: { tmdb: 674, media: movie }
+  - pattern: "Harry\\.Potter\\.V"
+    bind: { tmdb: 675, media: movie }
+  - pattern: "哈利波特5"
+    bind: { tmdb: 675, media: movie }
+  - pattern: "Harry\\.Potter\\.VI"
+    bind: { tmdb: 767, media: movie }
+  - pattern: "哈利波特6"
+    bind: { tmdb: 767, media: movie }
+  - pattern: "Harry\\.Potter\\.and\\.the\\.Deathly\\.Hallows.* Part\\.1"
+    bind: { tmdb: 12444, media: movie }
+  - pattern: "哈利波特与死亡圣器1"
+    bind: { tmdb: 12444, media: movie }
+  - pattern: "Harry\\.Potter\\.and\\.the\\.Deathly\\.Hallows.* Part\\.2"
+    bind: { tmdb: 12445, media: movie }
+  - pattern: "哈利波特与死亡圣器2"
+    bind: { tmdb: 12445, media: movie }
+
+  # --- 国漫 ---
+  - pattern: "斗破苍宆"
+    bind: { tmdb: 79481, media: tv }
+    
+
+  # --- 日漫长篇集数绑定 ---
+  - pattern: "樱桃小丸子第二期.*?\\[(\\d{4})\\]"
+    bind: { tmdb: 57775, media: tv, season: 2, episode: "$1" }
+  - pattern: "Chibi Maruko-chan II.*?\\[(\\d+)\\]"
+    bind: { tmdb: 57775, media: tv, season: 2, episode: "$1" }
+  - pattern: "NewDoraemon哆啦A梦新番\\[(\\d+)\\]"
+    bind: { tmdb: 65733, media: tv, season: 1, episode: "$1" }
+
+  # --- 宇宙啦啦队tmdbid绑定 ---
+  - pattern: "(?i)宇宙啦啦队.*S(\\d+)"
+    bind:
+      tmdb: 316099
+      media: tv
+      season: 1  
+      
+  # --- 新网球王子 U-17 世界杯 半决赛篇tmdbid绑定 ---
+  - pattern: (?i)新网球王子 U-17 世界杯 半决赛篇
+    bind:
+      tmdb: 205493
+      media: tv
+      season: 2
+      episode: $1
+      
+  # --- 正则替换 ---
+  - pattern: Blu-rayRemux
+    replace: Blu-ray.Remux
+  - pattern: "(?i)\\b·\\b"
+    replace: .
+  
+  # --- 无效发布组标签清理 ---
+  - pattern: "-SC(?=[\\W_]|$)"
+    action: remove
+  - pattern: "-SCDIY(?=[\\W_]|$)"
+    action: remove
+  - pattern: "-WF(?=[\\W_]|$)"
+    action: remove
+  - pattern: "-404(?=[\\W_]|$)"
+    action: remove
+  - pattern: "Ftang"
+    action: remove
+
+  # --- 特殊格式文件名清理 ---
+  - pattern: "^\\[\\d{4}]\\[(?:中国|大陆|台湾|香港|美国|英国|法国|德国|意大利|西班牙|俄罗斯|日本|韩国|印度|泰国|越南|澳大利亚|加拿大|新西兰|墨西哥|巴西|阿根廷|土耳其|捷克|匈牙利|波兰|瑞典|挪威|丹麦|芬兰)].*?\\[.*?GB](.*?)(LGNB)"
+    replace: "$1$2"
+  - pattern: "中配"
+    action: remove
+  - pattern: "日配"
+    action: remove
+
+# ==================== 季集映射 (mp) ====================
+mp:
+  # 关于我转生变成史莱姆这档事
+  - tmdb: 82684
+    from: { season: 1, ep: [25, 48] }
+    to:   { season: 2, ep: [1, 24] }
+  - tmdb: 82684
+    from: { season: 1, ep: [49, 72] }
+    to:   { season: 3, ep: [1, 24] }
+  # 咒术回战
+  - tmdb: 95479
+    from: { season: 2, ep: [1, 12] }
+    to:   { season: 1, ep: [25, 36] }
+  - tmdb: 95479
+    from: { season: 3, ep: [1, 12] }
+    to:   { season: 1, ep: [48, 59] }
+  # 绝对可怜小孩
+  - tmdb: 42926
+    from: { season: 1, ep: [27, 51] }
+    to:   { season: 2, ep: [1, 25] }
+  # 机动战士高达逆A
+  - tmdb: 37546
+    from: { season: 1, ep: [26, 50] }
+    to:   { season: 2, ep: [1, 25] }
+  # 我推的孩子
+  - tmdb: 203737
+    from: { season: 2, ep: [1, 13] }
+    to:   { season: 1, ep: [12, 24] }
+  - tmdb: 203737
+    from: { season: 3, ep: [1, 11] }
+    to:   { season: 1, ep: [25, 35] }
+  # 葬送的芙莉莲
+  - tmdb: 209867
+    from: { season: 2, ep: [1, 28] }
+    to:   { season: 1, ep: [29, 56] }
+  # 百炼成神
+  - tmdb: 213791
+    from: { season: 2, ep: [1, 52] }
+    to:   { season: 1, ep: [53, 104] }
+  - tmdb: 213791
+    from: { season: 3, ep: [1, 52] }
+    to:   { season: 1, ep: [105, 156] }
+  # 龙珠Z
+  - tmdb: 12971
+    from: { season: 1, ep: [40, 74] }
+    to:   { season: 2, ep: [1, 35] }
+  - tmdb: 12971
+    from: { season: 1, ep: [75, 107] }
+    to:   { season: 3, ep: [1, 33] }
+  - tmdb: 12971
+    from: { season: 1, ep: [108, 139] }
+    to:   { season: 4, ep: [1, 32] }
+  - tmdb: 12971
+    from: { season: 1, ep: [140, 165] }
+    to:   { season: 5, ep: [1, 26] }
+  - tmdb: 12971
+    from: { season: 1, ep: [166, 194] }
+    to:   { season: 6, ep: [1, 29] }
+  - tmdb: 12971
+    from: { season: 1, ep: [195, 219] }
+    to:   { season: 7, ep: [1, 25] }
+  - tmdb: 12971
+    from: { season: 1, ep: [220, 253] }
+    to:   { season: 8, ep: [1, 34] }
+  - tmdb: 12971
+    from: { season: 1, ep: [254, 291] }
+    to:   { season: 9, ep: [1, 38] }
+  # 龙珠GT (特别篇)
+  - tmdb: 12697
+    from: { season: 1, ep: [65, 66] }
+    to:   { season: 0, ep: [1, 2] }
+  # 一念永恒
+  - tmdb: 107371
+    from: { season: 2, ep: [1, 54] }
+    to:   { season: 1, ep: [53, 106] }
+  - tmdb: 107371
+    from: { season: 3, ep: [1, 59] }
+    to:   { season: 1, ep: [107, 165] }
+  # 游戏王-怪兽之决斗
+  - tmdb: 902
+    from: { season: 2, ep: [1, 48] }
+    to:   { season: 1, ep: [50, 97] }
+  - tmdb: 902
+    from: { season: 3, ep: [1, 47] }
+    to:   { season: 1, ep: [98, 144] }
+  - tmdb: 902
+    from: { season: 4, ep: [1, 40] }
+    to:   { season: 1, ep: [145, 184] }
+  - tmdb: 902
+    from: { season: 5, ep: [1, 40] }
+    to:   { season: 1, ep: [185, 224] }
+  # 文豪野犬
+  - tmdb: 65931
+    from: { season: 2, ep: [1, 12] }
+    to:   { season: 1, ep: [13, 24] }
+  - tmdb: 65931
+    from: { season: 3, ep: [1, 12] }
+    to:   { season: 1, ep: [25, 36] }
+  - tmdb: 65931
+    from: { season: 2, ep: [13, 13] }
+    to:   { season: 0, ep: [1, 1] }
+  - tmdb: 65931
+    from: { season: 4, ep: [1, 13] }
+    to:   { season: 1, ep: [37, 49] }
+  - tmdb: 65931
+    from: { season: 5, ep: [1, 11] }
+    to:   { season: 1, ep: [50, 60] }
+  # 再见，地球
+  - tmdb: 214587
+    from: { season: 2, ep: [1, 10] }
+    to:   { season: 1, ep: [11, 20] }
+  # 半妖的夜叉姬
+  - tmdb: 103254
+    from: { season: 2, ep: [1, 24] }
+    to:   { season: 1, ep: [25, 48] }
+  # 婚戒物语
+  - tmdb: 218493
+    from: { season: 2, ep: [1, 13] }
+    to:   { season: 1, ep: [13, 25] }
+  # 我的幸福婚姻
+  - tmdb: 196944
+    from: { season: 2, ep: [1, 13] }
+    to:   { season: 1, ep: [13, 25] }
+  # 皮奥里亚王子
+  - tmdb: 84111
+    from: { season: 2, ep: [1, 8] }
+    to:   { season: 1, ep: [9, 16] }
+  # 逆天邪神
+  - tmdb: 235643
+    from: { season: 2, ep: [1, 20] }
+    to: { season: 1, ep: [31, 50] }
+  # 妻子的浪漫旅行
+  - tmdb: 97199
+    from: { season: 7, ep: [1, 14] }
+    to_tmdb: 239038
+    to: { season: 1, ep: [1, 14] }
+  - tmdb: 97199
+    from: { season: 8, ep: [1, 13] }
+    to: { season: 7, ep: [1, 13] }
+  - tmdb: 97199
+    from: { season: 9, ep: [1, 10] }
+    to: { season: 8, ep: [1, 10] }
+  # 搜神记  
+  - tmdb: 317329
+    from: { season: 1, ep: [1, 24] }
+    to_tmdb: 233291
+    to: { season: 1, ep: [1, 24] }  
+  # 宇宙啦啦队  
+  - tmdb: 316013
+    from: { season: 1, ep: [1, 30] }
+    to_tmdb: 316099
+    to: { season: 1, ep: [1, 30] }
+  # 星辰变
+  - tmdb: 83708
+    from: { season: 4, ep: [37, 52] }
+    to_tmdb: 83708
+    to: { season: 4, ep: [1, 16] }
+  
+
+# ==================== 制作组 ====================
+groups:
+  - 7³ACG
+  - name: ADWeb
+    keywords: [ADWeb, "Nest@ADWeb"]
+  - name: ADE
+    keywords: [ADE, "AnimeF@ADE"]
+  - AliPan
+  - Amor压制组
+  - ANK-Raws
+  - APEX
+  - Beatrice-Raws
+  - BitsTV
+  - name: Sunny
+    keywords: [Sunny, Breeze, "Breeze@Sunny"]
+  - CtrlHD
+  - DDR
+  - Deadmau-RAWS
+  - DON
+  - EDITH
+  - EMTP-Raws
+  - EPSiLON
+  - name: Erai-raws
+    keywords: [Erai-raws, Erai]
+  - FLUX
+  - FraMeSToR
+  - name: FRDS
+    keywords: [FRDS, "cXcY@FRDS"]
+  - HDS
+  - name: HDsky
+    keywords: [HDsky, "dislike@HDsky"]
+  - HDCTV
+  - HDHIVE
+  - HDChina
+  - HDVideo
+  - HiveWeb
+  - name: HDSWEB
+    keywords: [HDSWEB, "Pure@HDSWEB", "DIY@HDSWEB"]
+  - name: iNT
+    keywords: [iNT, "iNT Team"]
+  - IrizaRaws
+  - Kagura
+  - LoliHouse
+  - Mo Cuishle
+  - Moozzi2
+  - name: MTeam
+    keywords: [MTeam, MT]
+  - MySilu
+  - niizk
+  - NTb
+  - OurBits
+  - philosophy-raws
+  - name: CHDBits
+    keywords: [CHDBits, "yoyola@CHDBits", "Beans@CHDBits", "DreamRu@CHDBits", "KKYY@CHDBits"]
+  - name: CHDWEB
+    keywords: [CHDWEB, "Lee@CHDWEB"]
+  - RLWeb
+  - SAIO-Raws
+  - SADPANDA
+  - SGNB
+  - Skymoon-Raws
+  - Snow-Raws
+  - SPARKS
+  - SubsPlease
+  - SweetSub
+  - SWTYBLZ
+  - Suzuya-Raws
+  - tG1R0
+  - TSDM
+  - TTG
+  - U2
+  - DewDream
+  - UBits
+  - UBWEB
+  - UNTOUCHED
+  - name: VCB-Studio
+    keywords: [VCB-Studio, VCB]
+  - WiKi
+  - Xrip
+  - YingWEB
+  - Zero-Raws
+  - ZmWeb
+  - AI-Raws
+  - AKito秋人
+  - B站小鱼儿呼唤爱
+  - B站仮面ライダーX酱
+  - BaiduBBB
+  - hchcsen
+  - hydes
+  - mawen1250
+  - Xeon晚生
+  - 一只出格君
+  - ANi
+  - APTX4869
+  - Arid
+  - Amor字幕组
+  - COKEMV
+  - DAY字幕组
+  - name: FSD字幕组
+    keywords: [FSD字幕组, FSD粉羽社, FSD]
+  - GM-Team
+  - IMAX
+  - Kawaiika-Raws
+  - Knf
+  - MCE汉化组
+  - MingYSub
+  - NEO·QSW
+  - SilverBullet
+  - sxales
+  - VARYG
+  - WBX
+  - X酱
+  - YYQ字幕组
+  - 爱恋字幕社
+  - 白恋字幕组
+  - 百冬练习组
+  - 霸王龙压制组
+  - 半糖字幕组
+  - 波子汽水汉化组
+  - 不当舔狗制作组
+  - 擦枪字幕组
+  - 澄空学园
+  - 晨曦制作
+  - 恶魔岛字幕组
+  - 风车字幕组
+  - 风之圣殿字幕组
+  - 枫叶字幕组
+  - 幻樱字幕组
+  - 幻月字幕组
+  - 幻之字幕组
+  - 婚姻与健美字幕组
+  - 极影字幕社
+  - 极彩字幕组
+  - 康复中心字幕组
+  - 康复重症监护室字幕组
+  - 酷漫字幕组
+  - 冷番补完字幕组
+  - 离谱Sub
+  - name: 六四位元字幕组
+    keywords: [六四位元字幕組, 六四位元字幕组]
+  - 漫猫字幕社
+  - 漫游字幕组
+  - 咪梦字幕组
+  - 喵萌奶茶屋
+  - 梦蓝字幕组
+  - 萌樱字幕组
+  - 魔穗字幕组
+  - 奶²
+  - 涅槃字幕组
+  - 千夏字幕组
+  - 氢气烤肉架
+  - 轻之国度字幕组
+  - 熔岩动画
+  - S1百综字幕组
+  - 生徒会字幕组
+  - 霜庭云花Sub
+  - 天香字幕社
+  - 甜饼字幕组
+  - 驯兽师联盟
+  - 豌豆字幕组
+  - 弯弯字幕组
+  - 小玩剧字幕组
+  - 星空字幕组
+  - 雪飘工作室
+  - 夜莺家族
+  - 亿次研同好会
+  - 亿万同人字幕组
+  - 异域-11番小队
+  - 银色子弹字幕组
+  - 永恒译制
+  - 悠哈璃羽字幕社
+  - 圆环记录攻略组
+  - 云歌字幕组
+  - 织梦字幕组
+  - 智械尚未危机制作
+  - 诸神字幕组
+  - Prejudice-Studio
+  - AISR
+  - 老K
+  - name: LGNB
+    keywords: [LGNB, "LGNB@oSpecialCN"]
+  - 北宇治字幕组
+  - 云光字幕组
+  - 猎户发布组
+  - SW字幕组
+  - 六道是我大鸽汉化组
+  - jibaketa-粤语版
+  - ❀拨雪寻春❀
+  - 新Sub
+  - DreamHD
+  - 桜都字幕组
+  - LittleBakas!
+  - 动漫国字幕组
+  - 猫恋汉化组
+  - OPFans枫雪动漫
+  - 前伪汉化组
+  - 华盟字幕社
+  - 黑白字幕组
+  - 香子兰翻译同好会
+  - 鈴風字幕組
+  - 樱桃花字幕组
+  - 西农YUI汉化组
+  - 神椿观测站
+  - FROGWeb
+  - 绿茶字幕组
+  - 晚街与灯
+  - 隣天使字幕组
+  - 時雨初空
+  - 三明治摆烂组
+  - 小栗帽后援会
+  - 虹作坊汉化组
+  - 极彩花梦
+  - 树屋字幕组
+  - Remux
+
+# ==================== 媒体服务 ====================
+streaming:
+  - name: Netflix
+    keywords: [Netflix, NF]
+  - name: Amazon
+    keywords: [Amazon, AMZN, "Amazon Prime"]
+  - name: Disney+
+    keywords: [Disney+, DSNP, "Disney Plus"]
+  - name: AppleTV+
+    keywords: [AppleTV+, ATVP, AppleTV]
+  - name: Bilibili
+    keywords: [Bilibili, BiliBili, B-Global]
+  - name: Crunchyroll
+    keywords: [Crunchyroll, CR]
+  - name: HBO Max
+    keywords: [MAX, HMAX, "HBO Max"]
+  - name: Hulu
+    keywords: [Hulu]
+  - name: Paramount+
+    keywords: [Paramount, PMTP, "Paramount+"]
+  - name: YouTube
+    keywords: [YouTube, YT]
+  - name: iTunes
+    keywords: [iTunes, iT]
+  - name: Abema
+    keywords: [Abema, AbemaTV]
+  - name: Bahamut
+    keywords: [Baha, Bahamut]
+  - name: CatchPlay
+    keywords: [CatchPlay, CATCHPLAY]
+  - name: friDay
+    keywords: [friDay]
+  - name: Hami
+    keywords: [Hami, "Hami Video"]
+  - name: iQIYI
+    keywords: [IQ, iQIYI]
+  - name: KKTV
+    keywords: [KKTV]
+  - name: LINE TV
+    keywords: [LINETV, "LINE TV"]
+  - name: MyTVSuper
+    keywords: [MyTVSuper]
+  - name: MyVideo
+    keywords: [MyVideo]
+  - name: TVING
+    keywords: [TVING]
+  - name: Viu
+    keywords: [Viu, ViuTV]
+  - name: playWEB
+    keywords: [playWEB]
+  - name: PMSP
+    keywords: [PMSP]
+
+# ==================== 地区编码 ====================
+region:
+  - name: CEE
+    keywords: [CEE]
+  - name: HKG
+    keywords: [HKG, "Hong Kong"]
+  - name: USA
+    keywords: [USA, US]
+  - name: GBR
+    keywords: [GBR, UK]
+  - name: GER
+    keywords: [GER, DEU]
+  - name: KOR
+    keywords: [KOR, KR]
+  - name: CHN
+    keywords: [CHN, CN]
+  - name: JPN
+    keywords: [JPN, JP]
+  - name: ITA
+    keywords: [ITA, IT]
+  - name: EUR
+    keywords: [EUR]
+  - name: FRA
+    keywords: [FRA, FR]
+  - name: TWN
+    keywords: [TWN, TW]
+  - name: BRA
+    keywords: [BRA, BR]
+  - name: AUS
+    keywords: [AUS, AU]
+  - name: NLD
+    keywords: [NLD, NL]
+  - name: ESP
+    keywords: [ESP, ES]
+  - name: NOR
+    keywords: [NOR, "NO"]
+  - name: CAN
+    keywords: [CAN, CA]
+  - name: FIN
+    keywords: [FIN, FI]
