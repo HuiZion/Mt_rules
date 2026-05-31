@@ -140,6 +140,18 @@ mr:
       tmdb: 316099
       media: tv
       season: 1  
+ 
+  # --- 波吉亚家族tmdbid绑定 ---
+  - pattern: 波吉亚家族
+    bind:
+      tmdb: 33025
+      media: tv
+
+  # --- 陌生人：第三章tmdbid绑定 ---
+  - pattern: 陌生人：第三章
+    bind:
+      tmdb: 1010755
+      media: movie
       
   # --- 新网球王子 U-17 世界杯 半决赛篇tmdbid绑定 ---
   - pattern: (?i)新网球王子 U-17 世界杯 半决赛篇
@@ -332,7 +344,11 @@ mp:
     from: { season: 4, ep: [37, 52] }
     to_tmdb: 83708
     to: { season: 4, ep: [1, 16] }
-  
+  # 波吉亚家族
+  - tmdb: 34388
+    from: { season: 1, ep: [1, 1] }
+    to_tmdb: 33025
+    to: { season: 1, ep: [1, 1] }
 
 # ==================== 制作组 ====================
 groups:
