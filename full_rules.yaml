@@ -50,8 +50,6 @@ mr:
     bind: { tmdb: 280632, media: tv }
   - pattern: "Mother.*2009"
     bind: { tmdb: 30018, media: movie }
-  - pattern: "Resurrection.*2025"
-    bind: { tmdb: 878608, media: movie }
   - pattern: "超时空要塞\\sFrontier"
     bind: { tmdb: 5857, media: tv }
   - pattern: "正义使者\\s*-\\s*我的英雄学院之非法英雄"
@@ -203,6 +201,8 @@ mr:
       tmdb: 280511
       media: tv
       episode: $1   
+
+ 
   
       
   # --- 正则替换 ---
