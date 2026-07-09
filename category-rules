@@ -99,7 +99,7 @@
 #   支持：普通值、-排除、!排除。
 #
 # 3. origin_country
-#   含义：剧集来源国家/地区。电影详情通常没有该字段，电影优先使用 production_countries。
+#   含义：剧集来源国家/地区。电影详情通常没有该字段。
 #   适用：主要用于 tv。
 #   来源：TMDB origin_country。
 #   匹配：任一国家/地区代码命中即可，大小写不敏感。
@@ -111,6 +111,8 @@
 #   适用：movie / tv。
 #   来源：TMDB production_countries[].iso_3166_1。
 #   匹配：任一国家/地区代码命中即可，大小写不敏感。
+#   注意：电影按地区分类时不推荐优先使用该字段；合拍、投资或发行背景可能导致
+#         英语片等外语片带有 JP/KR/IN 等制作国家，从而误入地区分类。
 #   特殊：用于 tv 时会先匹配 production_countries；如果没命中，会回退匹配 origin_country。
 #   示例：production_countries: "US,GB,FR,DE,CA"
 #   支持：普通值、-排除、!排除。
@@ -227,9 +229,8 @@
 # 必须同时是动画和儿童：
 #   genre_ids: "+16,+10762"
 #
-# 日本或韩国，语言/国家满足任意一个即可：
-#   ?origin_country: "JP,KR"
-#   ?original_language: "ja,ko"
+# 日本或韩国电影按原始语言归类：
+#   original_language: "ja,ko"
 #
 # 音乐类型且标题包含演出关键词：
 #   genre_ids: "10402,-16"
@@ -279,12 +280,11 @@ movie:
 
   # ===================================================================================================
   # 优先级3：演唱会 - 华语歌手演唱会
-  # 音乐类型 + 演出类标题词；语言/国家作为可选辅助。
+  # 音乐类型 + 演出类标题词；语言和歌手/标题关键词作为可选辅助。
   # ===================================================================================================
   演唱会/华语歌手演唱会:
     genre_ids: "10402,-16"
     ?original_language: "zh,cn,bo,za,-ja,-ko"
-    ?production_countries: "CN,TW,HK,MO,-JP,-KR"
     keywords: "演唱会,巡演,巡迴,巡回,演出,音乐会,音樂會,音乐·会,音乐剧,音樂劇,交响乐,交響樂,歌剧,歌劇,歌会,歌會,音乐节,音樂節,现场,現場,Live,Concert,Tour,Performance,Show,Stage,MV精选集,特别节目,湾区升明月"
     series_actors: "周杰伦,林俊杰,王力宏,张韶涵,陈奕迅,张学友,孙燕姿,李宗盛,刘若英,郭富城,谭咏麟,林忆莲"
     series_keywords: "湾区升明月,中央广播电视总台中秋晚会"
@@ -295,7 +295,6 @@ movie:
   演唱会/亚洲歌手演唱会:
     genre_ids: "10402,-16"
     ?original_language: "ja,ko,id,th,ms,tl,vi"
-    ?production_countries: "JP,KR,TH,VN,ID,MY,PH,SG"
     keywords: "演唱会,巡演,巡迴,巡回,演出,音乐会,音樂會,音乐剧,音樂劇,交响乐,歌剧,歌会,音乐节,音樂節,现场,現場,Live,Concert,Tour,Performance,Show,Stage,MV精选集,特别节目,日本武道馆,初音未来,魔法未来,Hatsune Miku,少女时代,米津玄师,酒井法子"
     series_actors: "初音未来,米津玄师,少女时代,酒井法子"
 
@@ -305,7 +304,6 @@ movie:
   演唱会/欧美歌手演唱会:
     genre_ids: "10402,-16"
     ?original_language: "-zh,-cn,-bo,-za,-ja,-ko,-id,-th,-ms,-tl,-vi"
-    ?production_countries: "US,GB,FR,DE,CA,ES,IT,AU,NZ"
     keywords: "演唱会,巡演,巡迴,巡回,演出,音乐会,音樂會,音乐剧,音樂劇,交响乐,交響樂,歌剧,歌劇,歌会,音乐节,音樂節,现场,現場,Live,Concert,Tour,Performance,Show,Stage,MV精选集,特别节目,音乐盛宴"
     series_keywords: "维也纳新年音乐会"
 
@@ -326,16 +324,14 @@ movie:
   # 优先级4：日韩电影
   # ===================================================================================================
   电影/日韩电影:
-    ?original_language: "ja,ko"
-    ?production_countries: "JP,KR"
+    original_language: "ja,ko"
 
   # ===================================================================================================
   # 优先级4：印度电影
   # ===================================================================================================
   电影/印度电影:
     keywords: "-战马"
-    ?original_language: "hi,ta,te,kn,mr,gu,pa,ml,bn,ur"
-    ?production_countries: "IN"
+    original_language: "hi,ta,te,kn,mr,gu,pa,ml,bn,ur"
 
   # ===================================================================================================
   # 优先级5：外语电影
