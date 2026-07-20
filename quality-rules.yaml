@@ -1000,11 +1000,10 @@ quality:
       codecs: []
       hdr_types: []
   # --------------------------------------------------------------------------
-  # 本地strm洗版，关闭ff,按画质评分选最优
+  # 本地strm洗版，按画质评分选最优
   # --------------------------------------------------------------------------
   - name: 本地strm洗版github
     id: strm-github
-    id: quality-strm
     scoring:
       resolution:
         enabled: true
