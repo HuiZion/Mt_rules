@@ -1181,7 +1181,8 @@ quality:
 
   # --------------------------------------------------------------------------
   # 殊途版：杜比优先洗版（P7 > P5 > P8）
-  # 开启 ffprobe / 关闭字幕与帧率干扰 / 防止低码率 DV 反杀高质量 HDR10+/Remux
+  # 主视频轨码率是核心质量指标；音轨与色深仅作为次级质量分
+  # 中文字幕仅作低权重细分；关闭帧率干扰，防止低码率 DV 反杀高质量 HDR10+/Remux
   # --------------------------------------------------------------------------
   - name: 殊途-杜比优先-视频码率版
     id: quality-shutu-dolby-2
@@ -1201,12 +1202,30 @@ quality:
       video_codec:
         enabled: true
         weight: 8
-        priority: [AV1, H.265, H.264, VP9]
+        priority: [AV1, H.265, H.264, VP9, VC-1]
 
       audio_codec:
-        enabled: false
-        weight: 0
-        priority: ["DTS:X", TrueHD Dolby Atmos, DTS-HD MA, Dolby TrueHD, DTS-HD, Dolby Digital Plus Atmos, Dolby Digital Plus, DTS, Dolby Digital, FLAC, AAC, MP3]
+        enabled: true
+        weight: 5
+        priority:
+          - codecs: [Dolby TrueHD]
+            atmos: true
+          - codecs: ["DTS:X"]
+          - codecs: [PCM]
+          - codecs: [DTS-HD MA]
+          - codecs: [Dolby TrueHD]
+            atmos: false
+          - codecs: [FLAC]
+          - codecs: [DTS-HD]
+          - codecs: [Dolby Digital Plus]
+            atmos: true
+          - codecs: [Dolby Digital Plus]
+            atmos: false
+          - codecs: [DTS]
+          - codecs: [Dolby Digital]
+          - codecs: [Opus]
+          - codecs: [AAC]
+          - codecs: [MP3]
 
       hdr:
         enabled: true
@@ -1214,8 +1233,8 @@ quality:
         priority: [Dolby Vision P7, Dolby Vision P5, Dolby Vision P8, Dolby Vision, HDR10+, HDR10, HLG, HDR, SDR]
 
       color_depth:
-        enabled: false
-        weight: 0
+        enabled: true
+        weight: 3
         priority: [12-bit, 10-bit, 8-bit]
 
       frame_rate:
@@ -1224,9 +1243,38 @@ quality:
         priority: [120fps, 60fps, 50fps, 30fps, 25fps, 24fps]
 
       subtitle:
-        enabled: false
-        weight: 0
-        priority: [PGS 简体中文特效, PGS 简体中文, ASS 简中特效, SRT 简体中文, PGS 繁体中文, SRT 繁体中文]
+        enabled: true
+        weight: 1
+        priority:
+          - languages: [zh-CN]
+            formats: [PGS]
+            source: any
+          - languages: [zh-CN]
+            formats: [ASS, SSA]
+            source: any
+          - languages: [zh-CN]
+            formats: [SRT, VTT]
+            source: any
+          - languages: [zh-TW, zh-HK, yue]
+            formats: [PGS]
+            source: any
+          - languages: [zh-TW, zh-HK, yue]
+            formats: [ASS, SSA]
+            source: any
+          - languages: [zh-TW, zh-HK, yue]
+            formats: [SRT, VTT]
+            source: any
+          - languages: [zh]
+            formats: [PGS]
+            source: any
+          - languages: [zh]
+            formats: [ASS, SSA]
+            source: any
+          - languages: [zh]
+            formats: [SRT, VTT]
+            source: any
+          - languages: [zh, yue]
+            source: any
 
       file_extension:
         enabled: false
@@ -1248,9 +1296,10 @@ quality:
 
   # --------------------------------------------------------------------------
   # 中文字幕优先规则：中文字幕优先，画质其次
-  # 任意中文内封/外挂字幕先获得统一加成；同为有字幕或无字幕时再比较画质
-  # 字幕最高 1000 分 > 其余画质与音频维度最高合计 960 分
-  # 音频最高 50 分，并准确区分 Atmos；音轨超过 4 条时直接排除
+  # 字幕先按简体 > 繁体/港繁/粤语 > 泛中文排序，各语言组内再按格式排序
+  # 格式顺序为 PGS > ASS/SSA > SRT/VTT；其他中文格式使用末档兜底
+  # 常见中文字幕最低 1000 分 > 其余画质与音频维度最高合计 960 分
+  # 音频最高 50 分，并准确区分 Atmos；音轨超过 6 条时直接排除
   # --------------------------------------------------------------------------
   - name: 中文字幕优先
     id: chinese-subtitle-first
@@ -1268,7 +1317,7 @@ quality:
       video_codec:
         enabled: true
         weight: 8
-        priority: [AV1, H.265, H.264, VP9]
+        priority: [AV1, H.265, H.264, VP9, VC-1]
 
       audio_codec:
         enabled: true
@@ -1278,17 +1327,19 @@ quality:
           - codecs: [Dolby TrueHD]
             atmos: true
           - codecs: ["DTS:X"]
+          - codecs: [PCM]
+          - codecs: [DTS-HD MA]
           - codecs: [Dolby TrueHD]
             atmos: false
-          - codecs: [DTS-HD MA]
-          - codecs: [Dolby Digital Plus]
-            atmos: true
           - codecs: [FLAC]
           - codecs: [DTS-HD]
+          - codecs: [Dolby Digital Plus]
+            atmos: true
           - codecs: [Dolby Digital Plus]
             atmos: false
           - codecs: [DTS]
           - codecs: [Dolby Digital]
+          - codecs: [Opus]
           - codecs: [AAC]
           - codecs: [MP3]
 
@@ -1311,7 +1362,34 @@ quality:
         enabled: true
         weight: 100
         priority:
-          - languages: [zh, zh-CN, zh-TW, zh-HK, yue]
+          - languages: [zh-CN]
+            formats: [PGS]
+            source: any
+          - languages: [zh-CN]
+            formats: [ASS, SSA]
+            source: any
+          - languages: [zh-CN]
+            formats: [SRT, VTT]
+            source: any
+          - languages: [zh-TW, zh-HK, yue]
+            formats: [PGS]
+            source: any
+          - languages: [zh-TW, zh-HK, yue]
+            formats: [ASS, SSA]
+            source: any
+          - languages: [zh-TW, zh-HK, yue]
+            formats: [SRT, VTT]
+            source: any
+          - languages: [zh]
+            formats: [PGS]
+            source: any
+          - languages: [zh]
+            formats: [ASS, SSA]
+            source: any
+          - languages: [zh]
+            formats: [SRT, VTT]
+            source: any
+          - languages: [zh, yue]
             source: any
 
       file_extension:
@@ -1331,5 +1409,4 @@ quality:
       resolutions: [360p]
       codecs: [Xvid, DivX]
       hdr_types: []
-
 
